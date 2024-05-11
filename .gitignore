@@ -1,0 +1,8 @@
+# download the font here: https://www.dafont.com/rainyhearts.font
+fonts/rainyhearts.ttf
+
+# copy data/rfids.yaml.example to data/rfids.yaml and customize
+data/rfids.yaml
+
+# upload your purchased .mp3 files here:
+audio/*

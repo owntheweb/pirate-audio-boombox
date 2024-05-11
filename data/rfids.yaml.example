@@ -1,0 +1,65 @@
+- id: 04c26ba3
+  type: playlist
+  items:
+      - file: kubos-chord.wav
+        title: Embedded Signal
+        authorName: 'Test Author'
+        albumName: 'Test Album'
+      - file: strollOnEnceladus02.wav
+        title: Stroll On Enceladus
+        author: 'Christopher Stevens'
+        album: 'For Science'
+- id: 339ef519
+  type: playlist
+  items:
+      - file: 02_Anthracite.mp3
+        title: Anthracite
+        author: 'Lane 8 & Tinlicker'
+        album: 'Feld / Anthracite'
+- id: ad5c8321
+  type: playlist
+  items:
+      - file: 'tycho/epoch/01 Glider.mp3'
+        title: 'Glider'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/02 Horizon.mp3'
+        title: 'Horizon'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/03 Slack.mp3'
+        title: 'Slack'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/04 Receiver.mp3'
+        title: 'Receiver'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/05 Epoch.mp3'
+        title: 'Epoch'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/06 Division.mp3'
+        title: 'Division'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/07 Source.mp3'
+        title: 'Source'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/08 Local.mp3'
+        title: 'Local'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/09 Rings.mp3'
+        title: 'Rings'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/10 Continuum.mp3'
+        title: 'Continuum'
+        author: 'Tycho'
+        album: 'Epoch'
+      - file: 'tycho/epoch/11 Field.mp3'
+        title: 'Field'
+        author: 'Tycho'
+        album: 'Epoch'
