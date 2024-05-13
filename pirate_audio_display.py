@@ -50,7 +50,7 @@ class PirateAudioDisplay:
         self.warp_speed_effect = PilWarpSpeed(
             star_count=30,
             star_size=8,
-            include_triangles=True,
+            include_polygons=True,
             warp_speed_amount=0.02,
             canvas_width=240,
             canvas_height=240,

@@ -48,7 +48,7 @@ class Star:
             self.brightness = 0.0
 
 
-class Triangle:
+class Polygon:
     def __init__(
             self,
             canvas_width=240,
@@ -85,7 +85,7 @@ class PilWarpSpeed:
             self,
             star_count=10,
             star_size=8,
-            include_triangles=True,
+            include_polygons=True,
             warp_speed_amount=0.005,
             canvas_width=240,
             canvas_height=240,
@@ -99,10 +99,10 @@ class PilWarpSpeed:
         self.throttle_frames = throttle_frames
         self.throttle_frame = 0
         self.stars = self.create_stars()
-        self.include_triangles = include_triangles
-        self.triangle_spawn_every = 50
-        self.triangle_spawn_i = 0
-        self.triangles = []
+        self.include_polygons = include_polygons
+        self.polygon_spawn_every = 50
+        self.polygon_spawn_i = 0
+        self.polygons = []
         self.fast_forward()
 
     # TODO: This smells funny:
@@ -122,19 +122,19 @@ class PilWarpSpeed:
             ))
         return stars
 
-    def cleanup_triangles(self):
-        cleaned_triangles = []
-        for triangle in self.triangles:
-            if not triangle.cleanup:
-                cleaned_triangles.append(triangle)
-        self.triangles = cleaned_triangles
+    def cleanup_polygons(self):
+        cleaned_polygons = []
+        for polygon in self.polygons:
+            if not polygon.cleanup:
+                cleaned_polygons.append(polygon)
+        self.polygons = cleaned_polygons
 
-    def create_triangle(self):
-        self.triangle_spawn_i += 1
-        if (self.triangle_spawn_i >= self.triangle_spawn_every or
-                len(self.triangles) == 0):
-            self.triangle_spawn_i = 0
-            self.triangles.append(Triangle(
+    def create_polygon(self):
+        self.polygon_spawn_i += 1
+        if (self.polygon_spawn_i >= self.polygon_spawn_every or
+                len(self.polygons) == 0):
+            self.polygon_spawn_i = 0
+            self.polygons.append(Polygon(
                     canvas_width=self.canvas_width,
                     canvas_height=self.canvas_height,
                     warp_speed_amount=self.warp_speed_amount,
@@ -151,28 +151,28 @@ class PilWarpSpeed:
             return False
 
     def loop(self):
-        for triangle in self.triangles:
-            triangle.update_position()
-        self.cleanup_triangles()
-        self.create_triangle()
+        for polygon in self.polygons:
+            polygon.update_position()
+        self.cleanup_polygons()
+        self.create_polygon()
         for star in self.stars:
             star.update_position()
 
     def draw(self, image_draw, color):
-        for triangle in self.triangles:
+        for polygon in self.polygons:
             image_draw.regular_polygon(
                 bounding_circle=(
-                    triangle.pos_x,
-                    triangle.pos_y,
-                    triangle.radius
+                    polygon.pos_x,
+                    polygon.pos_y,
+                    polygon.radius
                 ),
-                n_sides=3,
-                rotation=triangle.rotation,
+                n_sides=4,
+                rotation=polygon.rotation,
                 fill=None,
                 outline=(
-                    round(color[0] * triangle.brightness * 0.6),
-                    round(color[1] * triangle.brightness * 0.6),
-                    round(color[2] * triangle.brightness * 0.6)
+                    round(color[0] * polygon.brightness * 0.6),
+                    round(color[1] * polygon.brightness * 0.6),
+                    round(color[2] * polygon.brightness * 0.6)
                 ),
                 width=4
             )
