@@ -162,6 +162,10 @@ class App():
                 self.audio.stop_song()
                 self.display.set_rfid(uid)
                 self.display.set_scroll_text('')
+        elif self.active_rfid_uid != 'EMPTY':
+            # in case cartridge signal was temporarily lost,
+            # unpause audio and continue (if paused)
+            self.audio.unpause_song()
 
     def get_local_ip(self):
         try:
@@ -178,7 +182,7 @@ class App():
         max_value = 26400
         normalized = round(pot_value / max_value, 2)
         return normalized
-    
+
     def handle_on_song_loaded(self):
         self.display.set_scroll_text('')
         scroll_text = self.make_audio_scroll_text()
@@ -192,11 +196,22 @@ class App():
         if success:
             self.last_rfid_scan = time.time()
             self.handle_rfid_scan(uid.hex())
-        elif time.time() - self.last_rfid_scan > 0.3:
-            # rfid cartridge removed, stop music
-            self.audio.stop_song()
-            self.active_rfid_uid = 'EMPTY'
-            self.display.set_scroll_text('')
+        elif time.time() - self.last_rfid_scan > 0.2:
+            if self.active_rfid_uid == 'EMPTY':
+                return
+            # rfid cartridge removed (maybe), pause music
+            # sometimes scanner looses rfid, so give it time before
+            # completely stopping
+            self.audio.pause_song()
+
+            # pause animation of sorts:
+            print('.', end="", flush=True)
+            if time.time() - self.last_rfid_scan > 3:
+                # reset music, wait for next cartridge
+                self.audio.stop_song()
+                self.active_rfid_uid = 'EMPTY'
+                print('EMPTY')
+                self.display.set_scroll_text('')
 
         volume = self.normalized_volume(self.volume_pot.value)
         self.audio.set_volume(volume)

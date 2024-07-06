@@ -53,6 +53,16 @@ class AudioPlayer:
     def stop_song(self):
         pygame.mixer.music.stop()
 
+    def pause_song(self):
+        if self.paused is False:
+            pygame.mixer.music.pause()
+            self.paused = True
+
+    def unpause_song(self):
+        if self.paused is True:
+            pygame.mixer.music.unpause()
+            self.paused = False
+
     def toggle_pause(self):
         if self.paused is False:
             pygame.mixer.music.pause()
